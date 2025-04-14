@@ -1,2 +1,10 @@
+*.class
+*.DS_Store
+
+# IDE files #
 .idea/
-.env
+.vscode/
+.classpath
+.settings/
+.project
+.factorypath
