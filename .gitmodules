@@ -1,0 +1,3 @@
+[submodule "openmrs-appglobal-refapp"]
+	path = openmrs-appglobal-refapp
+	url = https://github.com/appglobalmrs/openmrs-appglobal-refapp.git
