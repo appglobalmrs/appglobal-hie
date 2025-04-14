@@ -1,8 +1,4 @@
 *.class
 **/.DS_Store
 
-# IDE files #
-.idea/
-.vscode/
-.classpath
-.settings/
+/.idea/
