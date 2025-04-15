@@ -144,6 +144,63 @@ services:
     networks:
       - hie
 
+# ===================== OpenCR Instance ======================
+  opencr:
+    container_name: open-clientregistry
+    hostname: opencr
+    image: intrahealth/opencr:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=docker
+      - HAPI_FHIR_URL=http://opencr-fhir:8080/fhir/metadata
+    volumes:
+      - ./configs/opencr/config.json:/src/server/config/config_docker.json
+      - ./configs/opencr/mediator.json:/src/server/config/mediator.json
+      - ./configs/opencr/decisionRules.json:/src/server/config/decisionRules.json
+      - ./configs/opencr/PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
+    depends_on:
+      - opencr-fhir
+    networks:
+      - hie
+    ports:
+      - 3000:3000
+
+  opencr-fhir:
+    image: hapiproject/hapi:v5.5.1
+    container_name: opencr-fhir
+    hostname: opencr-fhir
+    restart: unless-stopped
+    healthcheck:
+      test: "curl -sS http://opencr-fhir:8080/fhir/metadata || exit 1"
+      interval: 90s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - /data/hapi
+    ports:
+      - 8087:8080
+    networks:
+      - hie
+  es:
+    container_name: es
+    hostname: es
+    image: intrahealth/elasticsearch:latest
+    restart: unless-stopped
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - /usr/share/elasticsearch/data
+      - ./esplugin/string-similarity:/usr/share/elasticsearch/plugins/string-similarity-scoring
+    healthcheck:
+      test: "curl --silent --fail http://es:9200/_cluster/health || exit 1"
+    networks:
+      - hie
+
 volumes:
   openmrs-data: ~
   db-data: ~
