@@ -181,7 +181,7 @@ services:
       - 8087:8080
     networks:
       - hie
-  es:
+  opencr-elasticsearch:
     container_name: es
     hostname: es
     image: intrahealth/elasticsearch:latest
