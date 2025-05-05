@@ -43,9 +43,13 @@ The project consists of two main components:
 Note: The project uses a git submodule for the OpenMRS Reference Application located at `openmrs-appglobal-refapp`. Make sure to initialize and update the submodule as shown in step 1.
 
 ## Accessing Services
+### You should be able to acces the AppGlobalMRS ,OpenHIM , OpenCR and Hapi-Fhir instances  at the following urls
+| Instance  |     URL       | credentials (user : password)|
+|---------- |:-------------:|------:                       |
+| OpenHIM   | http://localhost:9000  |  root@openhim.org : openhim |
+| OpenCR    | http://localhost:3000/crux  |  root@intrahealth.org  : intrahealth|
+| AppGlobalMRS | https://localhost:8089 |    admin : Admin123| 
 
-- OpenMRS Frontend: http://localhost:8089
-- OpenHIM Console: http://localhost:9000
 - OpenHIM Core API: http://localhost:8085
 
 ## Configuration
