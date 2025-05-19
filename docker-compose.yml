@@ -132,7 +132,7 @@ services:
 
   openhim-config:
     container_name: openhim-config
-    image: ghcr.io/digi-uw/openhim-config:latest
+    image: ghcr.io/digi-uw/openhim-config:v0.0.0
     volumes:
       - ./configs/openhim/test-openhim-config.json:/app/test-openhim-config.json
     networks:
